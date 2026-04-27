@@ -1,16 +1,39 @@
-<h1> <p align="center"> Single Cell RNA-Seq </p></h1>
-<h2> Table of Contents</h2>
+<h2 id="table-of-contents">📌 Table of Contents</h2>
 
 <ul>
   <li><a href="#overview">Overview</a></li>
   <li><a href="#tools-used">Tools Used</a></li>
   <li><a href="#dataset">Dataset</a></li>
   <li><a href="#workflow-overview">Workflow Overview</a></li>
-  <li><a href="#installation">Installation</a></li>
 
-  <li><b>Pipeline Implementation</b>
+  <li><b>📘 Section 1: Pre-processing</b>
     <ul>
+      <li><a href="#section1-overview">Section 1 Overview</a></li>
+      <li><a href="#section1-tools">Tools (Section 1)</a></li>
       <li><a href="#data-loading">Data Loading</a></li>
+      <li><a href="#sample-integration">Sample Integration</a></li>
+      <li><a href="#qc-metrics">QC Metrics</a></li>
+      <li><a href="#qc-calculation">QC Calculation</a></li>
+      <li><a href="#filtering-section1">Filtering</a></li>
+      <li><a href="#doublet-detection-section1">Doublet Detection</a></li>
+      <li><a href="#normalization-section1">Normalization</a></li>
+    </ul>
+  </li>
+
+  <li><b>📘 Section 2: AnnData Tutorial</b>
+    <ul>
+      <li><a href="#section2-overview">Section 2 Overview</a></li>
+      <li><a href="#anndata-structure">AnnData Structure</a></li>
+      <li><a href="#metadata-addition">Metadata Addition</a></li>
+      <li><a href="#subsetting">Subsetting</a></li>
+      <li><a href="#feature-engineering">Feature Engineering</a></li>
+      <li><a href="#save-load">Save & Load</a></li>
+    </ul>
+  </li>
+
+  <li><b>🧪 Section 3: Full Pipeline</b>
+    <ul>
+      <li><a href="#data-loading-3">Data Loading</a></li>
       <li><a href="#quality-control">Quality Control</a></li>
       <li><a href="#quality-visualization">Quality Visualization</a></li>
       <li><a href="#filtering">Filtering</a></li>
@@ -22,19 +45,22 @@
       <li><a href="#clustering">Clustering</a></li>
       <li><a href="#qc-recheck">QC Recheck</a></li>
       <li><a href="#marker-genes">Marker Genes</a></li>
-      <li><a href="#dotplot">Dotplot Visualization</a></li>
+      <li><a href="#dotplot">Dotplot</a></li>
       <li><a href="#cell-annotation">Cell Annotation</a></li>
       <li><a href="#differential-expression">Differential Expression</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#interpretation">Interpretation</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
     </ul>
   </li>
-  
-  <li><a href="#results">Results (Top Differentially Expressed Genes)</a></li>
-  <li><a href="#interpretation">Results Interpretation</a></li>
-  <li><a href="#conclusion">Conclusion</a></li>
 </ul>
 <h2 id="overview">Overview</h2>
 <p>
-This project implements a complete scRNA-seq preprocessing, clustering, and cell-type annotation pipeline using publicly available bone marrow mononuclear cell data. The workflow follows best practices in single-cell transcriptomics, ensuring biological accuracy, reproducibility, and scalability. It integrates statistical rigor with computational efficiency to extract meaningful cellular heterogeneity.
+This repository contains a complete scRNA-seq analysis workflow using Python, implemented with Scanpy and AnnData, covering:
+
+10X Genomics preprocessing
+AnnData structure learning
+Full scRNA-seq pipeline (QC → clustering → annotation)
 </p>
 
 <p>
@@ -117,6 +143,219 @@ AnnData object with n_obs × n_vars = 17125 × 36601
 
 ---
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>scRNA-seq Preprocessing Pipeline</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 40px;
+        background-color: #f9f9f9;
+        color: #222;
+    }
+    h1, h2, h3 {
+        color: #2c3e50;
+    }
+    code {
+        background-color: #eef;
+        padding: 2px 4px;
+        border-radius: 4px;
+    }
+    pre {
+        background: #eef;
+        padding: 10px;
+        border-radius: 6px;
+        overflow-x: auto;
+    }
+    .section {
+        background: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+</style>
+</head>
+
+<body>
+
+
+<!-- SECTION 1 -->
+<div class="section" id="section1">
+
+<h2 id="preprocessing">SECTION 1: Pre-processing of 10X Single-Cell RNA Datasets</h2>
+
+<h3> Overview</h3>
+<p>
+This module handles raw 10X Genomics data preprocessing, including quality control (QC), filtering, normalization, and merging multiple samples.
+</p>
+
+<h3> Tools Used</h3>
+<pre>
+import scanpy as sc
+import anndata as ad
+import pooch
+</pre>
+
+<p>
+Scanpy handles single-cell analysis, AnnData stores structured data, and Pooch downloads datasets via DOI.
+</p>
+
+<h3> Data Loading</h3>
+<pre>
+DATA = pooch.create(
+    path=pooch.os_cache("scRNA_data"),
+    base_url="doi:10.6084/m9.figshare.22716739.v1/",
+)
+DATA.load_registry_from_doi()
+</pre>
+
+<p>Downloads raw 10X datasets from an online repository.</p>
+
+<h3> Sample Integration</h3>
+<pre>
+samples = {
+    "s1d1": "s1d1_filtered_feature_bc_matrix.h5",
+    "s1d3": "s1d3_filtered_feature_bc_matrix.h5",
+}
+
+adatas = {}
+
+for sid, file in samples.items():
+    path = DATA.fetch(file)
+    adata = sc.read_10x_h5(path)
+    adata.var_names_make_unique()
+    adatas[sid] = adata
+
+adata = ad.concat(adatas, label="sample")
+</pre>
+
+<p>Merges multiple 10X samples into a unified AnnData object.</p>
+
+<h3> QC Metrics</h3>
+<pre>
+adata.var["mt"] = adata.var_names.str.startswith("MT-")
+adata.var["ribo"] = adata.var_names.str.startswith(("RPS", "RPL"))
+adata.var["hb"] = adata.var_names.str.contains("^HB")
+</pre>
+
+<p>Identifies mitochondrial, ribosomal, and hemoglobin genes.</p>
+
+<h3> QC Calculation</h3>
+<pre>
+sc.pp.calculate_qc_metrics(
+    adata,
+    qc_vars=["mt", "ribo", "hb"],
+    inplace=True,
+    log1p=True
+)
+</pre>
+
+<p>Computes key quality control metrics per cell.</p>
+
+<h3> Filtering</h3>
+<pre>
+sc.pp.filter_cells(adata, min_genes=100)
+sc.pp.filter_genes(adata, min_cells=3)
+</pre>
+
+<p>Removes low-quality cells and low-expression genes.</p>
+
+<h3> Doublet Detection</h3>
+<pre>
+sc.pp.scrublet(adata, batch_key="sample")
+</pre>
+
+<p>Detects and flags potential doublets.</p>
+
+<h3>Normalization</h3>
+<pre>
+adata.layers["counts"] = adata.X.copy()
+sc.pp.normalize_total(adata)
+sc.pp.log1p(adata)
+</pre>
+
+<p>Normalizes counts and applies log transformation.</p>
+
+<h3> Output</h3>
+<pre>
+adata.write("preprocessed_10x.h5ad")
+</pre>
+
+</div>
+
+<!-- SECTION 2 -->
+<div class="section" id="section2">
+
+<h2 id="anndata">📘 SECTION 2: Basic AnnData Tutorial</h2>
+
+<h3> Overview</h3>
+<p>
+This section explains the AnnData structure and basic manipulation using PBMC data.
+</p>
+
+<h3>Load Dataset</h3>
+<pre>
+import scanpy as sc
+adata = sc.datasets.pbmc3k()
+</pre>
+
+<p>Loads built-in PBMC dataset for learning AnnData structure.</p>
+
+<h3> AnnData Structure</h3>
+<pre>
+print(adata.shape)
+print(adata.obs.head())
+print(adata.var.head())
+</pre>
+
+<p>
+Explores:
+<ul>
+<li>.X → expression matrix</li>
+<li>.obs → cell metadata</li>
+<li>.var → gene metadata</li>
+</ul>
+</p>
+
+<h3> Metadata Addition</h3>
+<pre>
+adata.obs["sample"] = "PBMC"
+adata.obs["condition"] = "healthy"
+</pre>
+
+<p>Adds experimental annotations.</p>
+
+<h3>Subsetting</h3>
+<pre>
+adata_subset = adata[:100, :500]
+</pre>
+
+<p>Creates smaller dataset for testing workflows.</p>
+
+<h3> Feature Engineering</h3>
+<pre>
+adata.obs["total_counts"] = adata.X.sum(axis=1)
+</pre>
+
+<p>Computes total RNA counts per cell.</p>
+
+<h3>Save & Load</h3>
+<pre>
+adata.write("anndata_basic.h5ad")
+adata_loaded = sc.read("anndata_basic.h5ad")
+</pre>
+
+<p>Ensures reproducibility using .h5ad format.</p>
+
+</div>
+
+</body>
+</html>
+
 <h2 id="installation">Installation</h2>
 
 <p>Install the required dependencies using pip:</p>
@@ -124,8 +363,14 @@ AnnData object with n_obs × n_vars = 17125 × 36601
 <pre>
 pip install scanpy anndata pooch
 </pre>
+<!-- SECTION 3 -->
+<div class="section" id="section3">
+  
+<h2 id="pipeline-implementation" >🧪 SECTION 3: Full scRNA-seq Analysis Pipeline </h2>
 
-<h2 id="pipeline-implementation">Pipeline Implementation</h2>
+ Overview
+
+This is the complete analysis pipeline from raw data → biological interpretation.
 
 <h3 id="data-loading">1️⃣ Data Loading</h3>
 
@@ -293,6 +538,7 @@ sc.pl.umap(adata, color="sample")
 </code></pre>
 <p align="center">
 <img width="445" height="400" alt="Figure_5" src="https://github.com/user-attachments/assets/317fd8c3-3846-4852-b8c9-8e91c49d79e4" />
+
 </p>
 
 <h3 id="clustering">🔟 Clustering (Leiden)</h3>
@@ -304,6 +550,12 @@ sc.tl.leiden(adata, resolution=0.5, flavor="igraph")
 for res in [0.02, 0.5, 2.0]:
     sc.tl.leiden(adata, key_added=f"leiden_res_{res}", resolution=res, flavor="igraph")
 
+</code></pre>
+<p>
+<img width="2056" height="562" alt="umap_multi_resolution" src="https://github.com/user-attachments/assets/526f857b-8c34-45b0-85a8-4875e4fd5900" />
+</p>
+
+<pre><code class="language-python">
 sc.pl.umap(
     adata,
     color=["leiden_res_0.02", "leiden_res_0.5", "leiden_res_2.0"]
