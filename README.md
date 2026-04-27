@@ -33,13 +33,13 @@ A complete end-to-end bioinformatics workflow for preprocessing, analyzing, and 
 
   <li><a href="#anndata">Section 2: AnnData </a>
     <ul>
-      <li><a href="#anndata">Overview</a></li>
-      <li><a href="#anndata">Load Dataset</a></li>
-      <li><a href="#anndata">AnnData Structure</a></li>
-      <li><a href="#anndata">Metadata Addition</a></li>
-      <li><a href="#anndata">Subsetting</a></li>
-      <li><a href="#anndata">Feature Engineering</a></li>
-      <li><a href="#anndata">Save & Load</a></li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#load-dataset">Load Dataset</a></li>
+      <li><a href="#anndata-structure">AnnData Structure</a></li>
+      <li><a href="#metadata-addition">Metadata Addition</a></li>
+      <li><a href="#subsetting">Subsetting</a></li>
+      <li><a href="#feature-engineering">Feature Engineering</a></li>
+      <li><a href="#save-&-load">Save & Load</a></li>
     </ul>
   </li>
 
