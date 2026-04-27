@@ -1,3 +1,9 @@
+<h1 id="top">🧬 Single-Cell RNA-seq Analysis Pipeline using Scanpy & AnnData</h1>
+
+<p>
+A complete end-to-end bioinformatics workflow for preprocessing, analyzing, and interpreting 10X Genomics single-cell RNA-seq data using Python-based scverse tools.
+</p>
+
 <h2 id="table-of-contents">📚 Table of Contents</h2>
 
 <ul>
