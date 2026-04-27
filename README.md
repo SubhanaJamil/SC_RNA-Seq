@@ -1,39 +1,45 @@
-<h2 id="table-of-contents">📌 Table of Contents</h2>
+<h2 id="table-of-contents">📚 Table of Contents</h2>
 
 <ul>
   <li><a href="#overview">Overview</a></li>
+
   <li><a href="#tools-used">Tools Used</a></li>
+
   <li><a href="#dataset">Dataset</a></li>
+
   <li><a href="#workflow-overview">Workflow Overview</a></li>
 
-  <li><b>📘 Section 1: Pre-processing</b>
+  <li><a href="#installation">Installation</a></li>
+
+  <li><a href="#section1-overview">Section 1: Pre-processing</a>
     <ul>
-      <li><a href="#section1-overview">Section 1 Overview</a></li>
-      <li><a href="#section1-tools">Tools (Section 1)</a></li>
+      <li><a href="#section1-overview">Overview</a></li>
+      <li><a href="#section1-overview">Data Loading</a></li>
+      <li><a href="#section1-overview">Sample Integration</a></li>
+      <li><a href="#section1-overview">QC Metrics</a></li>
+      <li><a href="#section1-overview">QC Calculation</a></li>
+      <li><a href="#section1-overview">Filtering</a></li>
+      <li><a href="#section1-overview">Doublet Detection</a></li>
+      <li><a href="#section1-overview">Normalization</a></li>
+      <li><a href="#section1-overview">Output</a></li>
+    </ul>
+  </li>
+
+  <li><a href="#anndata">Section 2: AnnData </a>
+    <ul>
+      <li><a href="#anndata">Overview</a></li>
+      <li><a href="#anndata">Load Dataset</a></li>
+      <li><a href="#anndata">AnnData Structure</a></li>
+      <li><a href="#anndata">Metadata Addition</a></li>
+      <li><a href="#anndata">Subsetting</a></li>
+      <li><a href="#anndata">Feature Engineering</a></li>
+      <li><a href="#anndata">Save & Load</a></li>
+    </ul>
+  </li>
+
+  <li><a href="#pipeline-implementation">Section 3: Full scRNA-seq Pipeline</a>
+    <ul>
       <li><a href="#data-loading">Data Loading</a></li>
-      <li><a href="#sample-integration">Sample Integration</a></li>
-      <li><a href="#qc-metrics">QC Metrics</a></li>
-      <li><a href="#qc-calculation">QC Calculation</a></li>
-      <li><a href="#filtering-section1">Filtering</a></li>
-      <li><a href="#doublet-detection-section1">Doublet Detection</a></li>
-      <li><a href="#normalization-section1">Normalization</a></li>
-    </ul>
-  </li>
-
-  <li><b>📘 Section 2: AnnData Tutorial</b>
-    <ul>
-      <li><a href="#section2-overview">Section 2 Overview</a></li>
-      <li><a href="#anndata-structure">AnnData Structure</a></li>
-      <li><a href="#metadata-addition">Metadata Addition</a></li>
-      <li><a href="#subsetting">Subsetting</a></li>
-      <li><a href="#feature-engineering">Feature Engineering</a></li>
-      <li><a href="#save-load">Save & Load</a></li>
-    </ul>
-  </li>
-
-  <li><b>🧪 Section 3: Full Pipeline</b>
-    <ul>
-      <li><a href="#data-loading-3">Data Loading</a></li>
       <li><a href="#quality-control">Quality Control</a></li>
       <li><a href="#quality-visualization">Quality Visualization</a></li>
       <li><a href="#filtering">Filtering</a></li>
@@ -46,13 +52,16 @@
       <li><a href="#qc-recheck">QC Recheck</a></li>
       <li><a href="#marker-genes">Marker Genes</a></li>
       <li><a href="#dotplot">Dotplot</a></li>
-      <li><a href="#cell-annotation">Cell Annotation</a></li>
+      <li><a href="#cell-annotation">Cell Type Annotation</a></li>
       <li><a href="#differential-expression">Differential Expression</a></li>
-      <li><a href="#results">Results</a></li>
-      <li><a href="#interpretation">Interpretation</a></li>
-      <li><a href="#conclusion">Conclusion</a></li>
     </ul>
   </li>
+
+  <li><a href="#results">Results</a></li>
+
+  <li><a href="#interpretation">Results Interpretation</a></li>
+
+  <li><a href="#conclusion">Conclusion</a></li>
 </ul>
 <h2 id="overview">Overview</h2>
 <p>
@@ -186,9 +195,8 @@ AnnData object with n_obs × n_vars = 17125 × 36601
 <!-- SECTION 1 -->
 <div class="section" id="section1">
 
-<h2 id="preprocessing">SECTION 1: Pre-processing of 10X Single-Cell RNA Datasets</h2>
+<h2 id="section1-overview">SECTION 1: Pre-processing</h2>
 
-<h3> Overview</h3>
 <p>
 This module handles raw 10X Genomics data preprocessing, including quality control (QC), filtering, normalization, and merging multiple samples.
 </p>
