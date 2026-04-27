@@ -306,12 +306,12 @@ adata.write("preprocessed_10x.h5ad")
 
 <h2 id="anndata">📘 SECTION 2: Basic AnnData Tutorial</h2>
 
-<h3> Overview</h3>
+<h3 id="overview"> Overview</h3>
 <p>
 This section explains the AnnData structure and basic manipulation using PBMC data.
 </p>
 
-<h3>Load Dataset</h3>
+<h3 id="load-dataset">Load Dataset</h3>
 <pre>
 import scanpy as sc
 adata = sc.datasets.pbmc3k()
@@ -319,7 +319,7 @@ adata = sc.datasets.pbmc3k()
 
 <p>Loads built-in PBMC dataset for learning AnnData structure.</p>
 
-<h3> AnnData Structure</h3>
+<h3 id="anndata-structure"> AnnData Structure</h3>
 <pre>
 print(adata.shape)
 print(adata.obs.head())
@@ -335,7 +335,7 @@ Explores:
 </ul>
 </p>
 
-<h3> Metadata Addition</h3>
+<h3 id="metadata-addition"> Metadata Addition</h3>
 <pre>
 adata.obs["sample"] = "PBMC"
 adata.obs["condition"] = "healthy"
@@ -343,21 +343,21 @@ adata.obs["condition"] = "healthy"
 
 <p>Adds experimental annotations.</p>
 
-<h3>Subsetting</h3>
+<h3 id="subsetting">Subsetting</h3>
 <pre>
 adata_subset = adata[:100, :500]
 </pre>
 
 <p>Creates smaller dataset for testing workflows.</p>
 
-<h3> Feature Engineering</h3>
+<h3 id="feature-engineering"> Feature Engineering</h3>
 <pre>
 adata.obs["total_counts"] = adata.X.sum(axis=1)
 </pre>
 
 <p>Computes total RNA counts per cell.</p>
 
-<h3>Save & Load</h3>
+<h3 id="save-&-load">Save & Load</h3>
 <pre>
 adata.write("anndata_basic.h5ad")
 adata_loaded = sc.read("anndata_basic.h5ad")
