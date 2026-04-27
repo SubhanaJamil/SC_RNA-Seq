@@ -1,4 +1,4 @@
-# SC_RNA-Seq
+<h1> <p align="center"> Single Cell RNA-Seq </p></h1>
 <h2> Overview</h2> 
 <p>
 This project implements a complete scRNA-seq preprocessing, clustering, and cell-type annotation pipeline using publicly available bone marrow mononuclear cell data. The workflow follows best practices in single-cell transcriptomics, ensuring biological accuracy, reproducibility, and scalability. It integrates statistical rigor with computational efficiency to extract meaningful cellular heterogeneity.
@@ -348,10 +348,30 @@ sc.tl.rank_genes_groups(
     groupby="leiden_res_0.5",
     method="wilcoxon"
 )
+sc.pl.rank_genes_groups_dotplot(adata, n_genes=5)
+
+print(sc.get.rank_genes_groups_df(adata, group="0").head(5))
 </code></pre>
 
 <img width="2885" height="1095" alt="Figure_9" src="https://github.com/user-attachments/assets/7c47a7e5-7297-401b-99b7-b4adc213a585" />
 
+<h2>Results — Top Differentially Expressed Genes</h2>
+
+<p>
+The following genes were identified as top differentially expressed markers using Wilcoxon rank-sum testing. These genes strongly define major immune cell populations, especially T cells.
+</p>
+
+<pre>
+┌─────────┬────────┬────────────────┬────────┬────────────┐
+│ Gene    │ Score  │ LogFC          │ p-val  │ adj p-val  │
+├─────────┼────────┼────────────────┼────────┼────────────┤
+│ CD3D    │ 77.57  │ 6.50           │ 0.0    │ 0.0        │
+│ CD3E    │ 74.02  │ 5.18           │ 0.0    │ 0.0        │
+│ BCL11B  │ 73.44  │ 5.80           │ 0.0    │ 0.0        │
+│ CD3G    │ 73.06  │ 5.11           │ 0.0    │ 0.0        │
+│ RPL30   │ 72.25  │ 54.56          │ 0.0    │ 0.0        │
+└─────────┴────────┴────────────────┴────────┴────────────┘
+</pre>
 
 <h2>📈 Results Interpretation</h2>
 
