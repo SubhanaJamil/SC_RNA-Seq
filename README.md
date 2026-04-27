@@ -699,3 +699,22 @@ It provides a <b>robust, scalable foundation</b> for:
 </ul>
 
 ---
+## 📂 Data & Outputs
+
+Due to large file sizes, all datasets and processed outputs are hosted externally.
+
+🔗 **OneDrive Access:** [Download Files](https://drive.google.com/file/d/1AW2enRQj7-BV5CbFFm_ajRYhdm-8kGwp/view?usp=drivesdk)
+
+### 📁 Available Files
+
+| File Name | Description      |
+|----------|-------------------|
+| `pbmc3k_raw.h5ad`            | Raw dataset used for AnnData tutorial |
+| `anndata_basic.h5ad`         | Processed dataset demonstrating AnnData structure |
+| `preprocessed_10x.h5ad`      | Cleaned and QC-filtered 10X dataset |
+| `final_pipeline_output.h5ad` | Final dataset after full scRNA-seq pipeline |
+
+### 🧠 Notes
+- All files are in `.h5ad` format compatible with :contentReference[oaicite:1]{index=1}
+- Each file corresponds to a specific section of the pipeline
+- Ensures full reproducibility of analysis
