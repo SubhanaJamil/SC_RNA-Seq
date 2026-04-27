@@ -19,15 +19,15 @@ A complete end-to-end bioinformatics workflow for preprocessing, analyzing, and 
 
   <li><a href="#section1-overview">Section 1: Pre-processing</a>
     <ul>
-      <li><a href="#section1-overview">Overview</a></li>
-      <li><a href="#section1-overview">Data Loading</a></li>
-      <li><a href="#section1-overview">Sample Integration</a></li>
-      <li><a href="#section1-overview">QC Metrics</a></li>
-      <li><a href="#section1-overview">QC Calculation</a></li>
-      <li><a href="#section1-overview">Filtering</a></li>
-      <li><a href="#section1-overview">Doublet Detection</a></li>
-      <li><a href="#section1-overview">Normalization</a></li>
-      <li><a href="#section1-overview">Output</a></li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#data-loading">Data Loading</a></li>
+      <li><a href="#sample-integration">Sample Integration</a></li>
+      <li><a href="#qc-metrics">QC Metrics</a></li>
+      <li><a href="#qc-calculation">QC Calculation</a></li>
+      <li><a href="#filtering">Filtering</a></li>
+      <li><a href="#doublet-detection">Doublet Detection</a></li>
+      <li><a href="#normalization">Normalization</a></li>
+      <li><a href="#output">Output</a></li>
     </ul>
   </li>
 
@@ -218,7 +218,7 @@ import pooch
 Scanpy handles single-cell analysis, AnnData stores structured data, and Pooch downloads datasets via DOI.
 </p>
 
-<h3> Data Loading</h3>
+<h3 id="data-loading"> Data Loading</h3>
 <pre>
 DATA = pooch.create(
     path=pooch.os_cache("scRNA_data"),
