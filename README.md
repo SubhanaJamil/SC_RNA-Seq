@@ -229,7 +229,7 @@ DATA.load_registry_from_doi()
 
 <p>Downloads raw 10X datasets from an online repository.</p>
 
-<h3> Sample Integration</h3>
+<h3 id="sample-integration"> Sample Integration</h3>
 <pre>
 samples = {
     "s1d1": "s1d1_filtered_feature_bc_matrix.h5",
@@ -249,7 +249,7 @@ adata = ad.concat(adatas, label="sample")
 
 <p>Merges multiple 10X samples into a unified AnnData object.</p>
 
-<h3> QC Metrics</h3>
+<h3 id="qc-metrics"> QC Metrics</h3>
 <pre>
 adata.var["mt"] = adata.var_names.str.startswith("MT-")
 adata.var["ribo"] = adata.var_names.str.startswith(("RPS", "RPL"))
@@ -258,7 +258,7 @@ adata.var["hb"] = adata.var_names.str.contains("^HB")
 
 <p>Identifies mitochondrial, ribosomal, and hemoglobin genes.</p>
 
-<h3> QC Calculation</h3>
+<h3 id="qc-calculation"> QC Calculation</h3>
 <pre>
 sc.pp.calculate_qc_metrics(
     adata,
@@ -270,7 +270,7 @@ sc.pp.calculate_qc_metrics(
 
 <p>Computes key quality control metrics per cell.</p>
 
-<h3> Filtering</h3>
+<h3 id="filtering"> Filtering</h3>
 <pre>
 sc.pp.filter_cells(adata, min_genes=100)
 sc.pp.filter_genes(adata, min_cells=3)
@@ -278,23 +278,23 @@ sc.pp.filter_genes(adata, min_cells=3)
 
 <p>Removes low-quality cells and low-expression genes.</p>
 
-<h3> Doublet Detection</h3>
+<h3 id="doublet-detection"> Doublet Detection</h3>
 <pre>
 sc.pp.scrublet(adata, batch_key="sample")
 </pre>
 
 <p>Detects and flags potential doublets.</p>
 
-<h3>Normalization</h3>
+<h3 id="normalization" >Normalization</h3>
 <pre>
 adata.layers["counts"] = adata.X.copy()
 sc.pp.normalize_total(adata)
-sc.pp.log1p(adata)
+sc.pp.log1p(adata) 
 </pre>
 
 <p>Normalizes counts and applies log transformation.</p>
 
-<h3> Output</h3>
+<h3 id="output"> Output</h3>
 <pre>
 adata.write("preprocessed_10x.h5ad")
 </pre>
