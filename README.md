@@ -7,18 +7,19 @@
   <li><a href="#dataset">Dataset</a></li>
   <li><a href="#workflow-overview">Workflow Overview</a></li>
   <li><a href="#installation">Installation</a></li>
-  <li><a href="#pipeline-implementation">Pipeline Implementation</a>
+
+  <li><b>Pipeline Implementation</b>
     <ul>
       <li><a href="#data-loading">Data Loading</a></li>
       <li><a href="#quality-control">Quality Control</a></li>
-      <li><a href="#qc-visualization">Quality Visualization</a></li>
+      <li><a href="#quality-visualization">Quality Visualization</a></li>
       <li><a href="#filtering">Filtering</a></li>
       <li><a href="#doublet-detection">Doublet Detection</a></li>
       <li><a href="#normalization">Normalization</a></li>
       <li><a href="#hvg-selection">Highly Variable Genes</a></li>
       <li><a href="#pca">PCA</a></li>
-      <li><a href="#umap">Graph Construction & UMAP</a></li>
-      <li><a href="#clustering">Clustering (Leiden)</a></li>
+      <li><a href="#neighbors-umap">Neighbors & UMAP</a></li>
+      <li><a href="#clustering">Clustering</a></li>
       <li><a href="#qc-recheck">QC Recheck</a></li>
       <li><a href="#marker-genes">Marker Genes</a></li>
       <li><a href="#dotplot">Dotplot Visualization</a></li>
@@ -26,12 +27,12 @@
       <li><a href="#differential-expression">Differential Expression</a></li>
     </ul>
   </li>
-  <li><a href="#Results (Top DE Genes)">Results (Top DE Genes)</a></li>
-  <li><a href="#results-interpretation">Results Interpretation</a></li>
+
+  <li><a href="#results">Results (Top DE Genes)</a></li>
+  <li><a href="#interpretation">Results Interpretation</a></li>
   <li><a href="#conclusion">Conclusion</a></li>
 </ul>
-
-<h2> Overview</h2> 
+<h2 id="overview">Overview</h2>
 <p>
 This project implements a complete scRNA-seq preprocessing, clustering, and cell-type annotation pipeline using publicly available bone marrow mononuclear cell data. The workflow follows best practices in single-cell transcriptomics, ensuring biological accuracy, reproducibility, and scalability. It integrates statistical rigor with computational efficiency to extract meaningful cellular heterogeneity.
 </p>
