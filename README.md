@@ -1,5 +1,5 @@
 <h1> <p align="center"> Single Cell RNA-Seq </p></h1>
-<h2>📌 Table of Contents</h2>
+<h2> Table of Contents</h2>
 
 <ul>
   <li><a href="#overview">Overview</a></li>
