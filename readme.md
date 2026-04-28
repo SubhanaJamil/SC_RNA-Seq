@@ -1,12 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Single-Cell RNA-seq Analysis Workflow</title>
-</head>
-
-<body>
 
 <h1 id="top">Single-Cell RNA-seq Analysis: Complete Workflow</h1>
 
@@ -18,9 +10,6 @@ This repository presents a comprehensive, end-to-end single-cell RNA sequencing 
 At a high level, the workflow begins with raw FASTQ files and progresses through quality control, alignment, matrix generation, structured data storage, and advanced computational analysis, ultimately leading to cell-type identification and biological interpretation.
 </p>
 
-<pre>
-FASTQ → QC → Alignment → Matrix Generation → Filtering → AnnData Structuring → Scanpy Analysis → Clustering → Annotation → Differential Expression
-</pre>
 
 <h2>Section 1: Preprocessing (Galaxy + STARsolo)</h2>
 
