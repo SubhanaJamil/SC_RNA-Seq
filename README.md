@@ -4,44 +4,6 @@
 A complete end-to-end bioinformatics workflow for preprocessing, analyzing, and interpreting 10X Genomics single-cell RNA-seq data using Python-based scverse tools.
 </p>
 
-<h2 id="table-of-contents">📚 Table of Contents</h2>
-
-<ul>
-  <li><a href="#overview">Overview</a></li>
-
-  <li><a href="#tools-used">Tools Used</a></li>
-
-  <li><a href="#dataset">Dataset</a></li>
-
-  <li><a href="#workflow-overview">Workflow Overview</a></li>
-
-  <li><a href="#installation">Installation</a></li>
-
-  <li><a href="#section1-overview">Section 1: Pre-processing</a>
-    <ul>
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#data-loading">Data Loading</a></li>
-      <li><a href="#sample-integration">Sample Integration</a></li>
-      <li><a href="#qc-metrics">QC Metrics</a></li>
-      <li><a href="#qc-calculation">QC Calculation</a></li>
-      <li><a href="#filtering">Filtering</a></li>
-      <li><a href="#doublet-detection">Doublet Detection</a></li>
-      <li><a href="#normalization">Normalization</a></li>
-      <li><a href="#output">Output</a></li>
-    </ul>
-  </li>
-
-  <li><a href="#anndata">Section 2: AnnData </a>
-    <ul>
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#load-dataset">Load Dataset</a></li>
-      <li><a href="#anndata-structure">AnnData Structure</a></li>
-      <li><a href="#metadata-addition">Metadata Addition</a></li>
-      <li><a href="#subsetting">Subsetting</a></li>
-      <li><a href="#feature-engineering">Feature Engineering</a></li>
-      <li><a href="#save-&-load">Save & Load</a></li>
-    </ul>
-  </li>
 
   <li><a href="#pipeline-implementation">Section 3: Full scRNA-seq Pipeline</a>
     <ul>
