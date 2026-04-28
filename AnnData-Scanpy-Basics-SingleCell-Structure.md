@@ -7,8 +7,7 @@ This tutorial demonstrates how single-cell RNA-seq data stored in <b>.h5ad</b> f
 <h2>Table of Contents</h2>
 
 <ul>
-  <li><a href="#top">Getting Started with AnnData Package</a></li>
-
+  
   <li><a href="#installation">Installation</a></li>
 
   <li><a href="#overview">Overview of AnnData Object</a></li>
