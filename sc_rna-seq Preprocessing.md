@@ -75,7 +75,54 @@ Two major pipelines exist for preprocessing 10X data. Cell Ranger is the officia
 <h2 id="workflow"> Workflow Overview</h2>
 
 <pre>
-Raw FASTQ → STARsolo → Count Matrix → DropletUtils → Filtered Matrix
+
+╭──────────────────────── scRNA-seq PREPROCESSING PIPELINE ────────────────────────╮
+
+                     Raw Input Data (FASTQ Files)
+                     R1 → Cell Barcode + UMI
+                     R2 → cDNA Reads
+                                      │
+                                      ▼
+               Step 1: Quality Assessment (FastQC / MultiQC)
+              • Per-base quality scores
+              • GC content distribution
+              • Adapter contamination check
+                                      │
+                                      ▼
+           Step 2: Barcode & UMI Extraction (STARsolo - R1)
+              • Extract cell barcodes (CB)
+              • Extract UMIs
+              • Validate against whitelist
+                                      │
+                                      ▼
+               Step 3: Read Alignment (STARsolo - R2)
+              • Align reads to reference genome (hg19)
+              • Assign reads to genes
+              • Remove PCR duplicates (UMI-based)
+                                      │
+                                      ▼
+          Step 4: Expression Matrix Generation (MEX Format)
+              • matrix.mtx (gene expression counts)
+              • barcodes.tsv (cell IDs)
+              • features.tsv (gene annotations)
+                                      │
+                                      ▼
+            Step 5: Quality Control Summary (MultiQC)
+              • Mapping efficiency (~87%)
+              • Alignment statistics
+                                      │
+                                      ▼
+            Step 6: Cell Filtering (DropletUtils - R)
+              • Remove empty droplets
+              • Identify real cells (knee plot)
+              • Filter low-quality cells
+                                      │
+                                      ▼
+             Final Output: Filtered Gene Expression Matrix
+              Ready for clustering, UMAP & cell annotation
+
+╰──────────────────────────── END OF PIPELINE ───────────────────────────────╯
+
 </pre>
 
 <h2 id="methodology">Methodology</h2>
@@ -353,10 +400,7 @@ abline(v=metadata(br.out)$inflection, col="red", lty=2)
 Cells above the knee point are considered high-confidence cells, while those below represent empty droplets or low-quality cells. 
 This visualization confirms the effectiveness of filtering and ensures that downstream analysis is performed on biologically meaningful data.
 </p>
-<b>Conclusion:</b> The results confirm that the preprocessing pipeline effectively removed noise, retained high-quality cells, 
-and generated a reliable dataset suitable for downstream single-cell analysis such as clustering, UMAP visualization, and cell-type annotation.
-</p>
-
+<b>Conclusion:</b> This preprocessing pipeline successfully transforms raw 10X Genomics sequencing data into a clean, high-quality gene expression matrix. The combination of STARsolo alignment and DropletUtils filtering ensures accurate cell detection, minimal noise, and reliable data suitable for downstream single-cell analysis such as clustering, UMAP visualization, and biological interpretation.
 <h2 id="limitations"> Limitations</h2>
 
 <ul>
